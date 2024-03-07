@@ -1,6 +1,9 @@
 // src/resolvers.ts
 import { DataSourceContext } from './context';
 import { Resolvers } from './types';
+import fs from 'fs';
+import path from 'path';
+import { processCSVStream } from './utils/processCsvStream';
 
 const resolvers: Resolvers<DataSourceContext> = {
   Query: {
@@ -23,7 +26,13 @@ const resolvers: Resolvers<DataSourceContext> = {
       return ids;
     },
     syncProductsFromCSV: async (_, __, { models }) => {
-      // Implement your CSV sync logic here
+      process.nextTick(() => {
+        const csvFilePath = path.resolve(__dirname, '../all_listings.csv');
+        const csvStream = fs.createReadStream(csvFilePath);
+
+        processCSVStream(csvStream, models);
+      });
+
       return true;
     },
   },

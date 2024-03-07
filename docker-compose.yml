@@ -1,0 +1,31 @@
+version: '3.4'
+
+services:
+  mongodb-container:
+    image: mongo
+    container_name: mongodb-container
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: admin
+      MONGO_INITDB_ROOT_PASSWORD: admin
+    ports:
+      - "27017:27017"
+    networks:
+      - mynetwork-product-api
+
+  productapi:
+    image: productapi
+    build:
+      context: .
+      dockerfile: ./Dockerfile
+    environment:
+      NODE_ENV: production
+    ports:
+      - 4000:4000
+    networks:
+      - mynetwork-product-api
+    depends_on:
+      - mongodb-container  
+
+networks:
+  mynetwork-product-api:
+    driver: bridge

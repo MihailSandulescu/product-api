@@ -6,10 +6,10 @@ export interface ProducerInterface extends Document {
   region?: string;
 }
 
-const producerSchema = new Schema({
+export const ProducerSchema = new Schema({
   name: { type: String, required: true },
   country: { type: String },
   region: { type: String },
 });
 
-export const ProducerModel =  model<ProducerInterface>('Producer', producerSchema);
+export const ProducerModel =  model<ProducerInterface>('Producer', ProducerSchema);

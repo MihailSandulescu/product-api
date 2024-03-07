@@ -1,13 +1,14 @@
 import express from 'express';
 import { graphqlHTTP } from 'express-graphql';
-import mongoose from '../mongodb';
-import { resolvers } from './resolvers';
+import mongoose from './mongodb';
+import resolvers from './resolvers';
 import { createContext } from './context';
 import schema from './schema.graphql';
 import { makeExecutableSchema } from '@graphql-tools/schema'; 
 
 const app = express();
 const PORT = process.env.PORT || 4000;
+const HOST = '0.0.0.0';
 
 const executableSchema = makeExecutableSchema({
   typeDefs: schema,
@@ -25,6 +26,6 @@ app.use(
   }))
 );
 
-app.listen(PORT, () => {
+app.listen(Number(PORT), HOST, () => {
   console.log(`Server is running on http://localhost:${PORT}/graphql`);
 });
