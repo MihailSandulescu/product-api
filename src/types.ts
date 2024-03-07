@@ -1,6 +1,6 @@
 import { GraphQLResolveInfo } from 'graphql';
-import { ProductInterface } from './models/ProductModel';
-import { ProducerInterface } from './models/ProducerModel';
+import { ProductInterface, ProductModel } from './models/ProductModel';
+import { ProducerInterface, ProducerModel } from './models/ProducerModel';
 import { DataSourceContext } from './context';
 export type Maybe<T> = T | null;
 export type InputMaybe<T> = Maybe<T>;
